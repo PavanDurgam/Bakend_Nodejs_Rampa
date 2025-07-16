@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
 
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+    cb(null, Date.now() + path.extname(file.originalname));
   }
 })
 const upload = multer({ storage: storage })
@@ -48,9 +48,9 @@ const getProductByFirm = async (req, res) => {
     if (!firm) {
       res.status(404).json({ err: "firm not found by id" })
     }
-    const products = await Product.find({firm:firmId})
+    const products = await Product.find({ firm: firmId })
     console.log(firm)
-     console.log(offer)
+    console.log(offer)
     res.status(200).json(products)
   } catch (error) {
     console.error(error);
@@ -58,7 +58,7 @@ const getProductByFirm = async (req, res) => {
   }
 }
 
-const deleteProductById  =async (req,res) => {
+const deleteProductById = async (req, res) => {
   try {
     const productId = req.params.productId
     const deleteProduct = await Product.findByIdAndDelete(productId)
@@ -74,4 +74,4 @@ const deleteProductById  =async (req,res) => {
 
 
 
-module.exports = { addProduct: [upload.single('image'), addProduct], getProductByFirm,deleteProductById };
+module.exports = { addProduct: [upload.single('image'), addProduct], getProductByFirm, deleteProductById };
