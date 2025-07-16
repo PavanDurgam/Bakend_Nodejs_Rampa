@@ -26,5 +26,5 @@ app.listen(port, () => { console.log(`server was sucessfully connected at port: 
 
 
 app.use('/', (req, res) => {
-   res.send(<h2>welcome to rampa</h2>)
+   res.send("<h2>welcome to rampa")
 })
