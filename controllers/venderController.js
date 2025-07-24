@@ -7,7 +7,6 @@ dotEnv.config()
 const secertKey = process.env.jwtTokenSecertyKey
 
 
-
 const vendorRegister = async (req, res) => {
     const { username, email, password } = req.body
     try {
@@ -16,18 +15,18 @@ const vendorRegister = async (req, res) => {
             console.log("email is already exists")
             return res.status(400).json("the given email is already exists")
 
-        } else {
-            const hashedpassword = await bcrypt.hash(password, 10)
-
-            const newVendor = await new Vendor({
-                username,
-                email,
-                password: hashedpassword
-            })
-            await newVendor.save();
-            res.status(200).json("vendor sucessfully registered")
-            console.log("registerd sucessfuly")
         }
+        const hashedpassword = await bcrypt.hash(password, 10)
+
+        const newVendor = await new Vendor({
+            username,
+            email,
+            password: hashedpassword
+        })
+        await newVendor.save();
+        res.status(200).json("vendor sucessfully registered")
+        console.log("registerd sucessfuly")
+
 
     } catch (error) {
         console.error(error)
@@ -79,4 +78,4 @@ const getByVendorId = async (req, res) => {
     }
 }
 
-module.exports = { vendorRegister, vendorLogin, getAllVendors,getByVendorId }
+module.exports = { vendorRegister, vendorLogin, getAllVendors, getByVendorId }

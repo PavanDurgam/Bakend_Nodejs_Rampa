@@ -5,9 +5,11 @@ const venderRouter = require('./routes/vendorRouter')
 const bodyParser = require('body-parser')
 const firmRouters = require('./routes/firmRoutes')
 const productRouter = require('./routes/productRouter')
+const cors = require('cors')
 
 dotEnv.config();
 const app = Express()
+app.use(cors())
 const port = process.env.PORT || 4000
 app.use(bodyParser.json())
 
